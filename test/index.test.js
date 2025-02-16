@@ -23,7 +23,9 @@ describe("twardown plugin", () => {
   });
 
   test("validates front matter format", async () => {
-    const input = "---\nInvalid front matter\n# Test";
+    const input = `---
+invalid front matter
+# Test`;
     const result = await processor.process(input);
     expect(result.messages[0].message).toBe(
       "Invalid YAML front matter: missing closing delimiter",
@@ -31,7 +33,10 @@ describe("twardown plugin", () => {
   });
 
   test("validates magic record in front matter", async () => {
-    const input = "---\ntitle: Test\n---\n# Test";
+    const input = `---
+title: Test
+---
+# Test`;
     const result = await processor.process(input);
     expect(result.messages[0].message).toBe(
       "Missing magic record (this_file) in front matter",
@@ -39,7 +44,10 @@ describe("twardown plugin", () => {
   });
 
   test("accepts valid magic record", async () => {
-    const input = "---\nthis_file: test.md\ntitle: Test\n---\n# Test";
+    const input = `---
+this_file: test.md
+---
+# Test`;
     const result = await processor.process(input);
     expect(result.messages).toHaveLength(0);
   });
@@ -56,7 +64,19 @@ describe("twardown plugin", () => {
   });
 
   test("processes GFM features", async () => {
-    const input = "---\nthis_file: test.md\n---\n# Test\n\n- [x] Task list item\n- [ ] Another task\n\n| Column 1 | Column 2 |\n|----------|----------|\n| Cell 1   | Cell 2   |\n\n~~strikethrough~~\n";
+    const input = `---
+this_file: test.md
+---
+# Test
+
+- [x] Task list item
+- [ ] Another task
+
+| Column 1 | Column 2 |
+|----------|----------|
+| Cell 1   | Cell 2   |
+
+~~strikethrough~~`;
     const result = await processor.process(input);
     expect(result.toString()).toContain("- [x] Task list item");
     expect(result.toString()).toContain("| Column 1 | Column 2 |");
@@ -64,7 +84,11 @@ describe("twardown plugin", () => {
   });
 
   test("processes frontmatter", async () => {
-    const input = "---\nthis_file: test.md\ntitle: Test Document\n---\n# Test";
+    const input = `---
+this_file: test.md
+title: Test Document
+---
+# Test`;
     const result = await processor.process(input);
     expect(result.toString()).toContain("title: Test Document");
   });
