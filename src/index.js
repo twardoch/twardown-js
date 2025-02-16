@@ -7,20 +7,68 @@
  * Plugin options for twardown
  * @typedef {Object} TwardownOptions
  * @property {boolean} [validateMagicRecord=true] - Whether to validate magic records
+ * @property {Object} [gfm] - Options for remark-gfm
+ * @property {Object} [frontmatter] - Options for remark-frontmatter
+ * @property {Object} [lint] - Options for remark-lint
  */
 
 /**
  * Twardown plugin for unified/remark
+ * Wraps multiple Remark plugins with sensible defaults:
+ * - remark-gfm: GitHub Flavored Markdown support
+ * - remark-frontmatter: YAML frontmatter support
+ * - remark-lint: Markdown linting
+ * - Custom magic record validation
+ * 
  * @param {TwardownOptions} [options={}] - Plugin options
  * @returns {import('unified').Transformer}
  */
 export function twardownPlugin(options = {}) {
   const opts = {
     validateMagicRecord: true,
+    gfm: {},
+    frontmatter: ['yaml'],
+    lint: {},
     ...options,
   };
 
   return function transformer(tree, file) {
+    // Configure the processor with wrapped plugins
+    const processor = this;
+
+    // Add remark-gfm
+    if (!processor.data('gfmAdded')) {
+      try {
+        const remarkGfm = require('remark-gfm');
+        processor.use(remarkGfm, opts.gfm);
+        processor.data('gfmAdded', true);
+      } catch (error) {
+        file.message('Failed to load remark-gfm plugin');
+      }
+    }
+
+    // Add remark-frontmatter
+    if (!processor.data('frontmatterAdded')) {
+      try {
+        const remarkFrontmatter = require('remark-frontmatter');
+        processor.use(remarkFrontmatter, opts.frontmatter);
+        processor.data('frontmatterAdded', true);
+      } catch (error) {
+        file.message('Failed to load remark-frontmatter plugin');
+      }
+    }
+
+    // Add remark-lint
+    if (!processor.data('lintAdded')) {
+      try {
+        const remarkLint = require('remark-lint');
+        processor.use(remarkLint, opts.lint);
+        processor.data('lintAdded', true);
+      } catch (error) {
+        file.message('Failed to load remark-lint plugin');
+      }
+    }
+
     // Validate magic record if enabled
     if (opts.validateMagicRecord) {
       const content = String(file);

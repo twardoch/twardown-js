@@ -31,6 +31,9 @@
   "dependencies": {
     "unified": "^11.0.4",
     "remark-parse": "^11.0.0",
-    "remark-stringify": "^11.0.0"
+    "remark-stringify": "^11.0.0",
+    "remark-gfm": "^4.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-lint": "^9.1.2"
   }
 }
