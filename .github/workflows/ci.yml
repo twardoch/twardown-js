@@ -29,7 +29,8 @@ jobs:
       run: npm run build
       
     - name: Run tests
-      run: npm test -- --coverage
+      run: |
+        NODE_OPTIONS=--experimental-vm-modules npm test -- --coverage
       
     - name: Upload coverage
       uses: codecov/codecov-action@v4
