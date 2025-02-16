@@ -3,6 +3,10 @@
  * @typedef {import('unified').Settings} Settings
  */
 
+import remarkGfm from 'remark-gfm';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkLint from 'remark-lint';
+
 /**
  * Plugin options for twardown
  * @typedef {Object} TwardownOptions
@@ -39,7 +43,6 @@ export function twardownPlugin(options = {}) {
     // Add remark-gfm
     if (!processor.data('gfmAdded')) {
       try {
-        const remarkGfm = require('remark-gfm');
         processor.use(remarkGfm, opts.gfm);
         processor.data('gfmAdded', true);
       } catch (error) {
@@ -50,7 +53,6 @@ export function twardownPlugin(options = {}) {
     // Add remark-frontmatter
     if (!processor.data('frontmatterAdded')) {
       try {
-        const remarkFrontmatter = require('remark-frontmatter');
         processor.use(remarkFrontmatter, opts.frontmatter);
         processor.data('frontmatterAdded', true);
       } catch (error) {
@@ -61,7 +63,6 @@ export function twardownPlugin(options = {}) {
     // Add remark-lint
     if (!processor.data('lintAdded')) {
       try {
-        const remarkLint = require('remark-lint');
         processor.use(remarkLint, opts.lint);
         processor.data('lintAdded', true);
       } catch (error) {
