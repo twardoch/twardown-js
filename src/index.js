@@ -10,20 +10,12 @@
  */
 
 /**
- * Twardown plugin for remark
- * @type {import('unified').Plugin<[Options?]>}
+ * Twardown plugin for remark to provide an opinionated Markdown flavor.
+ * @type {import('unified').Plugin}
  */
-export default function remarkTwardown(options = {}) {
-    const settings = {
-        option1: true,
-        ...options
-    }
-
-    /**
-     * @param {Processor} processor
-     */
-    return function (processor) {
-        // TODO: Add actual plugin configuration here
-        // This will include registering all the plugins that make up the Twardown flavor
-    }
+export default function twardown() {
+  return (tree) => {
+    // TODO: Add actual plugin functionality
+    return tree
+  }
 }
