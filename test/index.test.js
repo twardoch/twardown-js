@@ -29,7 +29,7 @@ describe("twardown plugin", () => {
     const result = await processor.process(input);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(
-      "Invalid YAML front matter: missing closing delimiter"
+      "Invalid YAML front matter: missing closing delimiter",
     );
   });
 
@@ -43,7 +43,7 @@ describe("twardown plugin", () => {
     const result = await processor.process(input);
     expect(result.messages).toHaveLength(1);
     expect(result.messages[0].message).toBe(
-      "Missing magic record (this_file) in front matter"
+      "Missing magic record (this_file) in front matter",
     );
   });
 

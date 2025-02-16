@@ -34,7 +34,9 @@ export function twardownPlugin(options = {}) {
       }
 
       // Find the end of front matter
-      const endIndex = lines.findIndex((line, i) => i > 0 && line.trim() === "---");
+      const endIndex = lines.findIndex(
+        (line, i) => i > 0 && line.trim() === "---",
+      );
       if (endIndex === -1) {
         file.message("Invalid YAML front matter: missing closing delimiter");
         return tree;
@@ -42,8 +44,9 @@ export function twardownPlugin(options = {}) {
 
       // Check for magic record in front matter
       const frontMatter = lines.slice(1, endIndex);
-      const hasMagicRecord = frontMatter.some(line =>
-        line.trim().startsWith("this_file:"));
+      const hasMagicRecord = frontMatter.some((line) =>
+        line.trim().startsWith("this_file:"),
+      );
 
       if (!hasMagicRecord) {
         file.message("Missing magic record (this_file) in front matter");
