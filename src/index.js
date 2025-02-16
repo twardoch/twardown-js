@@ -23,15 +23,12 @@ export function twardownPlugin(options = {}) {
   return function transformer(tree, file) {
     // Validate magic record if enabled
     if (opts.validateMagicRecord) {
-      const firstNode = tree.children[0];
-      if (
-        firstNode?.type === "paragraph" &&
-        firstNode.children[0]?.type === "text"
-      ) {
-        const text = firstNode.children[0].value;
-        if (!text.startsWith("// this_file:")) {
-          file.message("Missing magic record at the start of the file");
-        }
+      const content = String(file);
+      const lines = content.split('\n');
+      const firstLine = lines[0];
+
+      if (!firstLine || !firstLine.trim().startsWith('// this_file:')) {
+        file.message('Missing magic record at the start of the file');
       }
     }
 
