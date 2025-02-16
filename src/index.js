@@ -24,11 +24,29 @@ export function twardownPlugin(options = {}) {
     // Validate magic record if enabled
     if (opts.validateMagicRecord) {
       const content = String(file);
-      const lines = content.split('\n');
-      const firstLine = lines[0];
+      const lines = content.split("\n");
 
-      if (!firstLine || !firstLine.trim().startsWith('// this_file:')) {
-        file.message('Missing magic record at the start of the file');
+      // Check for YAML front matter with magic record
+      const hasFrontMatter = lines[0]?.trim() === "---";
+      if (!hasFrontMatter) {
+        file.message("Missing YAML front matter");
+        return tree;
+      }
+
+      // Find the end of front matter
+      const endIndex = lines.findIndex((line, i) => i > 0 && line.trim() === "---");
+      if (endIndex === -1) {
+        file.message("Invalid YAML front matter: missing closing delimiter");
+        return tree;
+      }
+
+      // Check for magic record in front matter
+      const frontMatter = lines.slice(1, endIndex);
+      const hasMagicRecord = frontMatter.some(line =>
+        line.trim().startsWith("this_file:"));
+
+      if (!hasMagicRecord) {
+        file.message("Missing magic record (this_file) in front matter");
       }
     }
 
