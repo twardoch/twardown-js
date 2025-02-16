@@ -1,0 +1,39 @@
+{
+  "name": "twardown-js",
+  "version": "0.1.0",
+  "description": "unified.js-compatible plugin wrapper for various Unified/Remark plugins",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "build": "babel src -d lib",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twardoch/twardown-js.git"
+  },
+  "keywords": [
+    "markdown",
+    "remark",
+    "unified"
+  ],
+  "author": "Adam Twardoch <adam@twardoch.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twardoch/twardown-js/issues"
+  },
+  "homepage": "https://github.com/twardoch/twardown-js#readme",
+  "dependencies": {
+    "unified": "^11.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0"
+  }
+}
