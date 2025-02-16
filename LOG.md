@@ -7,12 +7,14 @@ this_file: twardown-js/LOG.md
 ## Initial Setup - 2024-03-24
 
 1. Package Structure
+
    - Set up project structure with modern configuration
    - Added basic remark plugin structure with TypeScript-style JSDoc
    - Configured build tools (babel) and testing framework (jest)
    - Added core unified/remark dependencies
 
 2. Dependencies
+
    - Added unified and remark core packages
    - Set up Jest for testing
    - Configured ESLint with Prettier integration
@@ -28,6 +30,7 @@ this_file: twardown-js/LOG.md
 ## Current Status
 
 1. Core Functionality
+
    - Basic plugin structure in place
    - Test infrastructure configured
    - Build system optimized
@@ -48,4 +51,4 @@ this_file: twardown-js/LOG.md
    - Updated test infrastructure
    - Fixed module import issues
    - Improved plugin structure
-   - Added proper Jest configuration 
+   - Added proper Jest configuration

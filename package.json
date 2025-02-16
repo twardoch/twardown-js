@@ -12,18 +12,11 @@
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,md}'"
   },
   "jest": {
-    "transform": {
-      "^.+\\.js$": [
-        "babel-jest",
-        {
-          "rootMode": "upward"
-        }
-      ]
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(unified|remark-parse|remark-stringify|mdast-util-.*|micromark-.*|unist-.*|bail|trough|vfile.*|is-.*)/)"
-    ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "transform": {},
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    }
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
