@@ -13,7 +13,7 @@
  * Twardown plugin for remark to provide an opinionated Markdown flavor.
  * @type {import('unified').Plugin}
  */
-export default function twardown() {
+export function twardownPlugin() {
   return (tree) => {
     // TODO: Add actual plugin functionality
     return tree

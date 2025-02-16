@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "lint": "eslint src test",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,md}'",
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,md}'"
@@ -23,7 +23,10 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(unified|remark-parse|remark-stringify|mdast-util-.*|micromark-.*|unist-.*|bail|trough|vfile.*|is-.*)/)"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "extensionsToTreatAsEsm": [
+      ".js"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
