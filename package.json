@@ -23,10 +23,7 @@
     "transformIgnorePatterns": [
       "node_modules/(?!(unified|remark-parse|remark-stringify|mdast-util-.*|micromark-.*|unist-.*|bail|trough|vfile.*|is-.*)/)"
     ],
-    "testEnvironment": "node",
-    "extensionsToTreatAsEsm": [
-      ".js"
-    ]
+    "testEnvironment": "node"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.1",
